@@ -10,7 +10,7 @@ import { ShopParams } from '../../shared/models/shopParams';
 })
 
 export class ShopService {
-  baseUrl = 'http://localhost:5144/api/'
+  baseUrl = 'https://localhost:7131/api/';
   private http = inject(HttpClient);
   types: string[] = [];
   brands: string[] = [];

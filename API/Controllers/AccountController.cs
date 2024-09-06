@@ -47,6 +47,15 @@ namespace API.Controllers
         [HttpGet("user-info")]
         public async Task<ActionResult> GetUserInfo()
         {
+            var cookies = Request.Cookies;
+            var cookieList = new List<string>();
+
+            foreach (var cookie in cookies)
+            {
+                cookieList.Add($"{cookie.Key}: {cookie.Value}");
+                Console.WriteLine($"{cookie.Key}: {cookie.Value}");
+            }
+
             if (User.Identity?.IsAuthenticated == false) return NoContent();
 
             var user = await signInManager.UserManager.GetUserByEmailWithAddress(User);
@@ -60,7 +69,7 @@ namespace API.Controllers
             });
         }
 
-        [HttpGet]
+        [HttpGet("auth-status")]
         public ActionResult GetAuthState()
         {
             return Ok(new
